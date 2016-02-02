@@ -36,9 +36,7 @@ module Lemonway
 
     def client_call method_name, *args, &block
       resp = @instance.call method_name, :message => build_message(args.extract_options!)
-      xml  = resp.body.fetch(:"#{method_name}_response").fetch(:"#{method_name}_result")
-      hash = with_custom_parser_options { Hash.from_xml(xml).underscore_keys(true).with_indifferent_access }
-
+      hash  = resp.body.fetch(:"#{method_name}_response").fetch(:"#{method_name}_result")
       val = if hash.key?(:e)
               raise Error, [hash.fetch(:e).try(:fetch, :code), hash.fetch(:e).try(:fetch, :msg)].join(' : ')
             elsif hash.key?(:trans)
