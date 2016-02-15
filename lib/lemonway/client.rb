@@ -45,7 +45,7 @@ module Lemonway
               raise Error, [hash.fetch(:e).try(:fetch, :code), hash.fetch(:e).try(:fetch, :msg)].join(' : ')
             elsif hash.key?(:trans)
               hash[:trans][:hpay]
-            elsif hash.key :wallet
+            elsif hash.key?(:wallet)
               hash[:wallet]
             else
               hash
