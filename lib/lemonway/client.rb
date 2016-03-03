@@ -36,7 +36,7 @@ module Lemonway
 
     def client_call method_name, *args, &block
       resp = @instance.call method_name, :message => build_message(args.extract_options!)
-      if method_name.to_s.start_with?('money_in')
+      if !method_name.to_s.start_with?('money_in3') and method_name.to_s.start_with?('money_in') 
         hash  = resp.body.fetch(:"#{method_name}_response").fetch(:money_in_result)
       else
         hash  = resp.body.fetch(:"#{method_name}_response").fetch(:"#{method_name}_result")
